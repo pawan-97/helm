@@ -1,0 +1,17 @@
+{{- if .Values.serviceaccount.create }}
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: webapp-svc
+  name: webapp-svc
+spec:
+  ports:
+  - name: webapp
+    port: 80
+    protocol: TCP
+    targetPort: 80
+  selector:
+    app: webapp
+  type: ClusterIP
+{{- end }}
