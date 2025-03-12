@@ -1,0 +1,11 @@
+deployment:
+  name: webapp-deployment
+  replicas: 2
+  image:
+    repository: nginx
+    tag: 1.19
+  ports:
+    port1: 80
+    port2: 8080
+container:
+  name: nginx-pod
