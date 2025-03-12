@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: {{ default "O-my-function" .Values.name }}-configmap
+  name: {{ required "Can't escape name:" .Values.name }}-configmap
 data:
   myvalue: "Hello World"
   drink: {{ .Values.drink | upper | quote }}
