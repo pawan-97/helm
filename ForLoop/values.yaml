@@ -1,5 +1,8 @@
 
 users:
-  - Alice
-  - Bob
-  - Charlie
+  - name: Alice
+    role: admin
+  - name: Bob
+    role: dev
+  - name: Charlie
+    role: editor
