@@ -1,0 +1,14 @@
+mariadb:
+ db:
+   name: "my-db"
+ auth:
+   rootPassword: qwedsa
+   password: qwedsa
+
+drupalUsername: admin
+drupalEmail: admin@example.com
+drupalPassword: qwedsa
+
+drupalDatabaseUser: bn_drupal
+drupalDatabasePassword: qwedsa
+drupalDatabaseName: bitnami_drupal
