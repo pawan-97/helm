@@ -1,6 +1,6 @@
 # HELM
 
-## HELM basic commands
+### HELM basic commands
 
 * List helm charts
 
@@ -171,4 +171,40 @@ helm install bitnami/wordpress --generate-name \
 
 ```
 helm install drupal bitnami/drupal --namespace mynamspace --create-namespace
+```
+
+* Install and an upgrade in sequence using exactly the same command
+
+```
+helm upgrade --install wordpress bitnami/wordpress
+```
+
+* Waiting for deployment readiness [ Wait until all resources in the release are in a “ready” state]
+
+```
+helm install mysite bitnami/drupal --wait --timeout 5m
+```
+
+* Rollback on failure : Automatically rolls back the release if the install/upgrade fails
+
+```
+helm upgrade mysite bitnami/drupal --values values.yaml --atomic --timeout 5m
+```
+
+* --force :Forces resource updates through delete & recreate instead of patching in-place
+
+```
+helm upgrade mysite bitnami/drupal --values values.yaml --force
+```
+
+* --cleanup-on-fail : If an install/upgrade fails, Helm deletes any resources it created in that operation.
+
+```
+helm upgrade mysite bitnami/drupal --values values.yaml --cleanup-on-fail
+```
+
+* --force and --cleanup-on-fail together for risky upgrades
+
+```
+helm upgrade mysite bitnami/drupal --values values.yaml  --force --cleanup-on-fail --timeout 5m
 ```
