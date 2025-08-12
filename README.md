@@ -95,3 +95,80 @@ helm upgrade mysite bitnami/drupal --version 6.2.22
 helm uninstall --keep-history
 ```
 
+* Generate k8s manifest files using helm template command
+
+```
+helm template mysite bitnami/drupal --values values.yaml --set drupalEmail=foo@example.com
+```
+
+### helm get command
+
+* helm get notes subcommand prints the release notes
+
+```
+helm get notes mysite
+```
+
+* helm get command to get values supplied during the last release
+
+```
+helm get values mysite
+```
+
+* helm get command to get values supplied during the 2nd release
+
+```
+helm get values mysite --revision 2
+```
+
+* helm get values to see all of the values currently set for that release
+
+```
+helm get values mysite --all
+```
+* Retrieve yaml manifest files
+
+```
+helm get manifest mysite
+```
+
+### History and Rollbacks
+
+* helm chart history
+
+```
+helm history mysite
+```
+
+* Rollback mysite chart to release version 2
+
+```
+helm rollback mysite 2 
+```
+
+* Keep history of a chart after deletion
+
+```
+helm uninstall wordpress --keep-history
+```
+
+### Installs and Upgrades
+
+* Generate unique name for a helm chart
+
+```
+helm install bitnami/wordpress --generate-name
+```
+
+* Additional flag that allows you to specify a naming template
+
+```
+helm install bitnami/wordpress --generate-name \
+--name-template "foo-{{ randAlpha 9 | lower }}"
+```
+
+* Create a namespace with helm charts
+
+```
+helm install drupal bitnami/drupal --namespace mynamspace --create-namespace
+```
