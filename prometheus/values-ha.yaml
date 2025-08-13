@@ -1,0 +1,37 @@
+prometheus:
+  service:
+    type: LoadBalancer
+    port: 9090
+  prometheusSpec:
+    replicas: 2
+    retention: 15d
+    storageSpec:
+      volumeClaimTemplate:
+        spec:
+          accessModes: ["ReadWriteOnce"]
+          resources:
+            requests:
+              storage: 10Gi
+
+alertmanager:
+  service:
+    type: LoadBalancer
+    port: 9093
+  alertmanagerSpec:
+    replicas: 3
+    storage:
+      volumeClaimTemplate:
+        spec:
+          accessModes: ["ReadWriteOnce"]
+          resources:
+            requests:
+              storage: 5Gi
+
+grafana:
+  service:
+    type: LoadBalancer
+    port: 3000
+  persistence:
+    enabled: true
+    size: 2Gi
+

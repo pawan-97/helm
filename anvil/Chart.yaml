@@ -1,0 +1,19 @@
+apiVersion: v2
+name: anvil
+description: A surpise to catch something speedy
+type: application
+version: 0.1.0
+appVersion: "1.16.0"
+icon: https://wile.example.com/anvil.svg
+keywords:
+  - road runner
+  - anvil
+home: https://wile.example.com/
+sources:
+  - https://github.com/Masterminds/learning-helm/tree/main/chapter4/anvil
+maintainers:
+  - name: ACME Corp
+    email: mainteners@example.com
+  - name: Wile E. Coyote
+    email: wile@example.com
+
