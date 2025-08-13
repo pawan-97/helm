@@ -2,7 +2,7 @@ apiVersion: metallb.io/v1beta1
 kind: L2Advertisement
 metadata:
   name: demo-example
-  namespace: default
+  namespace: metallb
 spec:
   ipAddressPools:
   - demo-pool

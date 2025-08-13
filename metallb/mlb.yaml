@@ -2,7 +2,7 @@ apiVersion: metallb.io/v1beta1
 kind: IPAddressPool
 metadata:
   name: demo-pool
-  namespace: default
+  namespace: metallb
 spec:
   addresses:
   - 172.18.100.0/24
