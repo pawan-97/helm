@@ -1,12 +1,12 @@
-# image:
-#   name: nginx 
-#   tag: latest
+image:
+  name: nginx 
+  tag: latest
 
-# labels:
-#   app: practice
-#   tier: frontend
-#   type: pod
-#   environment: dev
+labels:
+  app: practice
+  tier: frontend
+  type: pod
+  environment: dev
 
 favourite:
   drink: "Coffee"
@@ -24,3 +24,52 @@ mysubchart:
 
 global:
   salad: caesar
+
+resources:
+  limits:
+    cpu: 1000m
+    memory: 512Mi
+  requests:
+    cpu: 250m
+    memory: 256Mi
+
+extraEnvVars:
+  - name: DATABASE_URL
+    value: postgres://localhost:5432/db
+  - name: CACHE_ENABLED
+    value: "true"
+  - name: LOG_LEVEL
+    value: info
+
+podAnnotations:
+  timestamp: "{{ now | date \"2006-01-02T15:04:05Z07:00\" }}"
+  chart-version: "{{ .Chart.Version }}"
+  release-name: "{{ .Release.Name }}"
+  type: "dev"
+
+config:
+  database.conf: |
+    host = {{ .Values.database.host }}
+    port = {{ .Values.database.port }}
+    name = {{ .Values.database.name }}
+    pool_size = {{ .Values.database.poolSize }}
+
+  nginx.conf: |
+    server {
+      listen 8080;
+      server_name {{ .Release.Name }}.{{ .Release.Namespace }}.svc.cluster.local;
+
+      location / {
+        proxy_pass http://{{ .Values.backend.service }}:{{ .Values.backend.port }};
+      }
+    }
+
+database:
+  host: postgres-service
+  port: 5432
+  name: myapp
+  poolSize: 20
+
+backend:
+  service: backend-svc
+  port: 8080

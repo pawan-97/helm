@@ -3,4 +3,7 @@ kind: ConfigMap
 metadata:
   name: {{ .Release.Name }}-configmap
 data:
-  salad: {{ .Values.global.salad }}
+  {{- range $file, $content := .Values.config }}
+  {{ $file }}: |
+    {{ tpl $content $ | nindent 4 }}
+  {{- end }}

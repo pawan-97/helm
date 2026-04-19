@@ -1,0 +1,27 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: nginx-pod
+  namespace: default
+  annotations:
+    {{- range $key, $value := .Values.podAnnotations }}
+    {{ $key }}: {{ tpl $value $ | quote }}
+    {{- end }}
+
+  labels:
+    {{- with .Values.labels }}
+    {{- range $key, $value := . }}
+    {{ $key }}: {{ $value }}
+    {{- end }}
+    {{- end }}
+spec:
+  containers:
+    - name: {{ .Values.image.name }}
+      image: {{ .Values.image.name }}:{{ .Values.image.tag }}
+      ports:
+        - containerPort: 80
+          protocol: TCP
+      resources:
+        {{- toYaml .Values.resources | nindent 8}}
+      env:
+        {{- toYaml .Values.extraEnvVars | nindent 8}}
