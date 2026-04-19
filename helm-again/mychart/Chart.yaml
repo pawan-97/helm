@@ -1,5 +1,15 @@
 apiVersion: v2
-name: practice
+name: mychart
 description: A practice chart for learning Helm control structures
 type: application
 version: 0.1.0
+
+additionalServices:
+  - name: cache
+    port: 6379
+    targetPort: 6379
+    type: ClusterIP
+  - name: metrics
+    port: 9090
+    targetPort: metrics
+    type: ClusterIP

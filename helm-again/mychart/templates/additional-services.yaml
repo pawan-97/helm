@@ -1,0 +1,6 @@
+{{- range .Values.additionalServices }}
+---
+{{ include "myapp.service" (merge (dict "name" .name "port" .port "targetPort" .targetPort "type" .type) $) }}
+{{- end }}
+
+

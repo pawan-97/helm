@@ -1,3 +1,6 @@
+deployment:
+  replicas: 3
+
 image:
   name: nginx 
   tag: latest
@@ -73,3 +76,35 @@ database:
 backend:
   service: backend-svc
   port: 8080
+
+
+monitoring:
+  enabled: true
+  annotations:
+    prometheus.io/scrape: "true"
+    prometheus.io/port: "9090"
+    custom.annotation: '{{ include "myapp.fullname" . }}-metrics'
+
+serviceMesh:
+  enabled: true
+  config: |
+    apiVersion: v1
+    kind: Service
+    metadata:
+      name: {{ include "myapp.fullname" . }}-mesh
+      labels:
+        {{- include "myapp.labels" . | nindent 4 }}
+    spec:
+      ports:
+      - port: {{ .Values.service.port }}
+        targetPort: htt
+
+additionalServices:
+  - name: cache
+    port: 6379
+    targetPort: 6379
+    type: ClusterIP
+  - name: metrics
+    port: 9090
+    targetPort: metrics
+    type: ClusterIP

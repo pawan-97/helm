@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "myapp.fullname" . }}
+  labels:
+    {{- include "myapp.labels" . | nindent 4 }}
+spec:
+  replicas: {{ .Values.deployment.replicas }}
+  selector:
+    matchLabels:
+      {{- include "myapp.selectorLabels" . | nindent 6 }}
+  template:
+    metadata:
+      labels:
+        {{- include "myapp.selectorLabels" . | nindent 8 }}
+    spec:
+      containers:
+        {{- with .Values.image }}
+        - name: {{ .name }}
+          image: {{ .name }}:{{ .tag }}
+          ports:
+            - containerPort: 80
+              protocol: TCP
+        {{- end }}
+          resources:
+            {{- toYaml .Values.resources | nindent 12}}
+          env:
+            {{- toYaml .Values.extraEnvVars | nindent 12}}  
