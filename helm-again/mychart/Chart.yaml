@@ -1,0 +1,5 @@
+apiVersion: v2
+name: practice
+description: A practice chart for learning Helm control structures
+type: application
+version: 0.1.0

@@ -1,0 +1,171 @@
+helm list
+helm repo add bitnami https://charts.bitnami.com/bitnami
+helm repo list
+helm search repo content
+helm search repo drupal --versions
+helm install mysite bitnami/drupal
+kubectl create ns first
+$ kubectl create ns second
+$ helm install --namespace first mysite bitnami/drupal
+$ helm install --namespace second mysite bitnami/drupal
+helm install mysite bitnami/drupal --values vaules.yaml 
+helm install mysite bitnami/drupal --set drupalUsername=admin
+helm install mysite bitnami/drupal --set mariadb.db.name=my-database
+helm list --all-namespaces
+helm install mysite bitnami/drupal --set ingress.enabled=false
+helm upgrade mysite bitnami/drupal --version 6.2.22
+helm install mysite bitnami/drupal --values values.yaml
+helm upgrade mysite bitnami/drupal --values values.yaml
+helm upgrade mysite bitnami/drupal --reuse-values
+Do not trying to mix --reuse-values with additional --set or --values options
+helm uninstall mysite
+helm uninstall mysite --namespace first
+helm install mysite bitnami/drupal --values vaules.yaml --set drupalEmail=foo@example.com --dry-run
+helm list
+helm repo add bitnami https://charts.bitnami.com/bitnami
+helm repo list
+helm search repo content
+helm search repo drupal --versions
+helm install mysite bitnami/drupal
+kubectl create ns first
+$ kubectl create ns second
+$ helm install --namespace first mysite bitnami/drupal
+$ helm install --namespace second mysite bitnami/drupal
+helm install mysite bitnami/drupal --values vaules.yaml 
+helm install mysite bitnami/drupal --set drupalUsername=admin
+helm install mysite bitnami/drupal --set mariadb.db.name=my-database
+helm list --all-namespaces
+helm install mysite bitnami/drupal --set ingress.enabled=false
+helm upgrade mysite bitnami/drupal --version 6.2.22
+helm install mysite bitnami/drupal --values values.yaml
+helm upgrade mysite bitnami/drupal --values values.yaml
+helm upgrade mysite bitnami/drupal --reuse-values
+Do not trying to mix --reuse-values with additional --set or --values options
+helm uninstall mysite
+helm uninstall mysite --namespace first
+helm install mysite bitnami/drupal --values vaules.yaml --set drupalEmail=foo@example.com --dry-run
+helm template mysite bitnami/drupal --values vaules.yaml --set drupalEmail=foo@example.com
+helm template mysite bitnami/drupal --values vaules.yaml --set drupalEmail=foo@example.com --validate 
+-> Several different statuses
+pending-install
+deployed
+pending-upgrade
+superseded
+pending-rollback
+uninstalling
+uninstalled
+failed
+
+helm get notes mysite
+helm get values mysite
+helm get values mysite --revision 2
+helm get values mysite --all
+helm get manifest mysite
+
+helm history mysite
+helm rollback mysite 2
+helm uninstall mysite --keep-history
+
+helm install bitnami/wordpress --generate-name
+helm install bitnami/wordpress --generate-name --name-template "foo-{{ randAlpha 9 | lower }}"
+
+helm install drupal bitnami/drupal --namespace mynamespace --create-namespace
+
+helm upgrade --install wordpress bitnami/wordpress
+
+helm install wordpress bitnami/wordpress --wait
+helm install wordpress bitnami/wordpress --wait --timeout 5m
+
+helm install wordpress bitnami/wordpress --atomic
+helm install wordpress bitnami/wordpress --atomic --timeout 5m
+helm upgrade wordpress bitnami/wordpress --atomic --timeout 5m
+
+helm upgrade drupal bitnami/drupal --force
+helm upgrade drupal bitnami/drupal --clean-on-fail
+
+helm install myapp anvil
+helm delete myapp
+
+
+helm package anvil
+helm package anvil --dependency-update
+helm package anvil -u
+helm package anvil -d /tmp/
+
+helm package anvil --app-version 1.17.0
+helm package anvil --version v1
+
+helm lint anvil
+
+.Release.Name
+The name of the release.
+.Release.Namespace
+Contains the namespace the chart is being released to.
+.Release.IsInstall
+Set to true when the release is a workload being installed.
+.Release.IsUpgrade
+Set to true when the release is an upgrade or rollback.
+.Release.Service
+Lists the service performing the release. When Helm installs a chart, this value is
+set to "Helm". Different applications, those that build on Helm, can set this to
+their own value.
+
+.Chart.Name
+Contains the name of the chart.
+.Chart.Version
+The version of the chart.
+.Chart.AppVersion
+The application version, if set.
+.Chart.Annotations
+Contains a key/value list of annotations.
+
+.Capabilities.APIVersions
+Contains the API versions and resource types available in your cluster.
+.Capabilities.KubeVersion.Version
+The full Kubernetes version.
+.Capabilities.KubeVersion.Major
+Contains the major Kubernetes version. Because Kubernetes has not been incre‐
+menting the major version, this is set to 1.
+.Capabilities.KubeVersion.Minor
+The minor version of Kubernetes being used in the cluster.
+
+.Template.Name
+Contains the namespaced filepath to the template.
+.Template.BasePath
+The namespaced path to the templates directory of the current chart 
+
+Pipelines
+character: {{ .Values.character | default "Sylvester" | quote }}
+
+nindent vs indent
+
+.Files.Get name
+Provides a means of getting the contents of the file as a string. name, in this case,
+is the name including filepath from the root of the chart.
+.Files.GetBytes
+Similar to .Files.Get but instead of returning a string, the file is returned as an
+array of bytes. In Go terms, this is a byte slice (i.e., []byte).
+.Files.Glob
+Accepts a glob pattern and returns another files object containing only the files
+whose names match the pattern.
+.Files.AsConfig
+Takes a files group and returns it as flattened YAML suitable to include in the
+data section of a Kubernetes ConfigMap manifest. This is useful when paired
+with .Files.Glob.
+.Files.AsSecrets
+Similar to .Files.AsConfig. Instead of returning flattened YAML it returns the
+data in a format that can be included in the data section of a Kubernetes Secret
+manifest. It’s Base64 encoded. This is useful when paired with .Files.Glob. For
+example, {{ .Files.Glob("mysecrets/**").AsSecrets }}.
+.Files.Lines
+Has an argument for a filename and returns the contents of the file as an array
+split by newlines (i.e., \n).
+
+
+{{ (lookup "apps/v1" "Deployment" "anvil" "runner").metadata.annotations }}
+- API Version
+- Kind of object
+- Namespace to look for the object in
+- Name of the resource you are looking for
+{{ (lookup "v1" "ConfigMap" "anvil" "").items }}
+

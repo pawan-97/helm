@@ -1,0 +1,6 @@
+drupalUsername: admin
+drupalEmail: admin@example.com
+
+mariadb:
+  db:
+    name: "my-database"

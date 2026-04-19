@@ -1,0 +1,26 @@
+# image:
+#   name: nginx 
+#   tag: latest
+
+# labels:
+#   app: practice
+#   tier: frontend
+#   type: pod
+#   environment: dev
+
+favourite:
+  drink: "Coffee"
+  food: "Pizza"
+
+pizzaToppings:
+  - mushrooms
+  - cheese
+  - peppers
+  - onions
+  - pineapple
+
+mysubchart:
+  dessert: "ice cream"
+
+global:
+  salad: caesar
