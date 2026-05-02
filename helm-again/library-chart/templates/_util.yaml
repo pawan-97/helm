@@ -1,0 +1,15 @@
+{{- /*
+library-chart.util.merge will merge two YAM templates and out the result as a single YAML document. The first template is the base and the second template will be merged into it. The second template will override any values in the first template that have the same keys.
+This take an array of three values:
+- The top base context
+- The template name of the overrides (destination)
+- The template name of the base (source)
+*/ -}}
+
+{{- define "library-chart.util.merge" -}}
+{{- $top := first . -}}
+{{- $overrides := fromYaml (include (index . 1) $top) | default (dict) -}}
+{{- $tpl := fromYaml (include (index . 2) $top) | default (dict) -}}
+{{- toYaml (merge $overrides $tpl) -}}
+{{- end -}}
+
