@@ -1,0 +1,14 @@
+apiVersion: v1
+entries:
+  superapp:
+  - apiVersion: v2
+    appVersion: 1.16.0
+    created: "2026-05-02T05:40:42.373602369Z"
+    description: A Helm chart for Kubernetes
+    digest: 4cb71f7c18b8c23680cc0dbf40046f7d1bcb71864212d8a2808a7df715bdc414
+    name: superapp
+    type: application
+    urls:
+    - superapp-0.1.0.tgz
+    version: 0.1.0
+generated: "2026-05-02T05:40:42.373077481Z"

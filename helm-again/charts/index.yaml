@@ -1,0 +1,25 @@
+apiVersion: v1
+entries:
+  duperapp:
+  - apiVersion: v2
+    appVersion: 1.16.0
+    created: "2026-05-02T08:11:15.894471238Z"
+    description: A Helm chart for Kubernetes
+    digest: 41a7bd0363b96822513e146108a4d40ca25c53862936ecd58ec3dc40cffd8c91
+    name: duperapp
+    type: application
+    urls:
+    - duperapp-0.1.0.tgz
+    version: 0.1.0
+  superapp:
+  - apiVersion: v2
+    appVersion: 1.16.0
+    created: "2026-05-02T05:40:42.373602369Z"
+    description: A Helm chart for Kubernetes
+    digest: 4cb71f7c18b8c23680cc0dbf40046f7d1bcb71864212d8a2808a7df715bdc414
+    name: superapp
+    type: application
+    urls:
+    - superapp-0.1.0.tgz
+    version: 0.1.0
+generated: "2026-05-02T08:11:15.893879077Z"
